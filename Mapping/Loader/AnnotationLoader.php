@@ -92,7 +92,14 @@ class AnnotationLoader implements LoaderInterface
                 }
             }
 
-            foreach ($this->reader->getMethodAnnotations($method) as $annotation) {
+			$annotations = $this->reader->getMethodAnnotations($method);
+
+			if (!\is_array($annotations)) {
+				/** @var $method \ReflectionMethod */
+				\error_log(\sprintf('%s::%s did not load method annotations in serializer', $className, $method->getName()));
+			}
+
+            foreach ($annotations as $annotation) {
                 if ($annotation instanceof Groups) {
                     if (!$accessorOrMutator) {
                         throw new MappingException(sprintf('Groups on "%s::%s" cannot be added. Groups can only be added on methods beginning with "get", "is", "has" or "set".', $className, $method->name));
