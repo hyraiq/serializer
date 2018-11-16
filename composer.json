@@ -59,7 +59,7 @@
     "extra": {
         "branch-alias": {
             "dev-master": "4.1-dev",
-            "dev-log-no-iterate": "4.1.7"
+            "dev-log-no-iterate": "4.1-dev"
         }
     }
 }
